@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-**/__pycache__
+__pycache__/
 *.py[cod]
 *$py.class
 
@@ -105,7 +105,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+venv
 venvw/
 ENV/
 env.bak/
@@ -130,6 +130,4 @@ dmypy.json
 .pyre/
 
 # Project specific
-static/images
-
-app/__pycache__
+static/images/seashell_images

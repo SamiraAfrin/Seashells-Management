@@ -10,8 +10,9 @@ from app.usecase.seashells import (
     get_seashell as get_seashell_usecase,
     get_all_seashells as get_all_seashells_usecase,
     update_seashell as update_seashell_usecase,
+    delete_seashell as delete_seashell_usecase,
 )
-from app.schemas.seashells import CreateSeaShellReq, SeaShellResponse, UpdateSeaShellReq
+from app.schemas.seashells import CreateSeaShellReq, UpdateSeaShellReq, Response
 from app.app_config import IMAGE_FOLDER
 
 seashell_router = APIRouter(
@@ -39,7 +40,7 @@ def save_image(image: UploadFile):
         return False, None
 
 
-@seashell_router.post("/", response_model=SeaShellResponse)
+@seashell_router.post("/", response_model=Response)
 def add_seashells(
     name: str = Form(...),
     collected_at: str = Form(...),
@@ -60,32 +61,33 @@ def add_seashells(
             image_url=image_url,
         )
 
-        return add_seashell_usecase(seashellreq, db)
+        data = add_seashell_usecase(seashellreq, db)
+        return Response(message="Seashell created successfully", data=data)
     else:
         raise HTTPException(status_code=400, detail="Invalid image file")
 
 
-@seashell_router.get("/{seashell_id}", response_model=SeaShellResponse)
+@seashell_router.get("/{seashell_id}", response_model=Response)
 def get_seashell(seashell_id: int, db: Session = Depends(get_database)):
 
     seashell_obj = get_seashell_usecase(seashell_id, db)
     if seashell_obj is None:
         raise HTTPException(status_code=404, detail="Seashell not found")
 
-    return seashell_obj
+    return Response(message="Seashell retrived successfully", data=seashell_obj)
 
 
-@seashell_router.get("/", response_model=list[SeaShellResponse])
+@seashell_router.get("/", response_model=Response)
 def get_all_seashells(db: Session = Depends(get_database)):
 
     seashell_objs = get_all_seashells_usecase(db)
     if len(seashell_objs) == 0:
         raise HTTPException(status_code=404, detail="DB is empty")
 
-    return seashell_objs
+    return Response(message="Seashells retrived successfully", data=seashell_objs)
 
 
-@seashell_router.put("/{seashell_id}", response_model=SeaShellResponse)
+@seashell_router.put("/{seashell_id}", response_model=Response)
 def update_seashells(
     seashell_id: int,
     name: str = Form(None),
@@ -123,4 +125,17 @@ def update_seashells(
             description if description is not None else seashell_obj.description
         )
 
-        return update_seashell_usecase(seashell_obj, seashellreq, db)
+        data = update_seashell_usecase(seashell_obj, seashellreq, db)
+        return Response(message="Seashell updated successfully", data=data)
+
+
+@seashell_router.delete("/{seashell_id}", response_model=Response)
+def delete_seashell(seashell_id: int, db: Session = Depends(get_database)):
+
+    seashell_obj = get_seashell_usecase(seashell_id, db)
+    if seashell_obj is None:
+        raise HTTPException(status_code=404, detail="Seashell not found")
+
+    data = delete_seashell_usecase(seashell_obj, db)
+
+    return Response(message="Seashell deleted successfully", data=data)

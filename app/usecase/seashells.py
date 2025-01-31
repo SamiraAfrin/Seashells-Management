@@ -8,6 +8,7 @@ from app.repository.seashells import (
     get_seashell as get_seashell_repo,
     get_all_seashells as get_all_seashells_repo,
     update_seashell as update_seashell_repo,
+    delete_seashell as delete_seashell_repo,
 )
 
 
@@ -45,3 +46,8 @@ def update_seashell(
     seashell_obj: SeaShell, updated_seashellreq: UpdateSeaShellReq, db: Session
 ):
     return update_seashell_repo(seashell_obj, updated_seashellreq, db)
+
+
+def delete_seashell(seashell_obj: SeaShell, db: Session):
+
+    return delete_seashell_repo(seashell_obj, db)

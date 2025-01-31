@@ -1,6 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Union, List
 
 
 class CreateSeaShellReq(BaseModel):
@@ -30,3 +30,8 @@ class SeaShellResponse(BaseModel):
 
     class Config:
         from_attributes = True  # map object attributes
+
+
+class Response(BaseModel):
+    message: str
+    data: Union[SeaShellResponse, List[SeaShellResponse]]

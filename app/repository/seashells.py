@@ -53,3 +53,11 @@ def update_seashell(
     db.commit()
     db.refresh(seashell_obj)
     return seashell_obj
+
+
+def delete_seashell(seashell_obj: SeaShell, db: Session):
+
+    db.delete(seashell_obj)
+    db.commit()
+
+    return seashell_obj

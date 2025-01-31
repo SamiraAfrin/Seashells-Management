@@ -11,6 +11,14 @@ class CreateSeaShellReq(BaseModel):
     image_url: str
 
 
+class UpdateSeaShellReq(BaseModel):
+    collected_at: Optional[datetime] = None
+    name: Optional[str] = None
+    species: Optional[str] = None
+    description: Optional[str] = None
+    image_url: Optional[str] = None
+
+
 class SeaShellResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
@@ -21,4 +29,4 @@ class SeaShellResponse(BaseModel):
     image_url: str
 
     class Config:
-        orm_mode = True  # Enables ORM compatibility
+        from_attributes = True  # map object attributes

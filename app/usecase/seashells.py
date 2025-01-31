@@ -1,12 +1,13 @@
 from sqlalchemy.orm import Session
 
-from app.schemas.seashells import CreateSeaShellReq
+from app.schemas.seashells import CreateSeaShellReq, UpdateSeaShellReq
 from app.models.seashells import SeaShell
 from app.repository.seashells import (
     get_db,
     add_seashell as add_seashell_repo,
     get_seashell as get_seashell_repo,
     get_all_seashells as get_all_seashells_repo,
+    update_seashell as update_seashell_repo,
 )
 
 
@@ -20,6 +21,7 @@ def get_database():
 
 def add_seashell(seashellreq: CreateSeaShellReq, db: Session):
     seashell = SeaShell(
+        collected_at=seashellreq.collected_at,
         name=seashellreq.name,
         species=seashellreq.species,
         description=seashellreq.description,
@@ -37,3 +39,9 @@ def get_seashell(seashell_id: int, db: Session):
 def get_all_seashells(db: Session):
 
     return get_all_seashells_repo(db)
+
+
+def update_seashell(
+    seashell_obj: SeaShell, updated_seashellreq: UpdateSeaShellReq, db: Session
+):
+    return update_seashell_repo(seashell_obj, updated_seashellreq, db)

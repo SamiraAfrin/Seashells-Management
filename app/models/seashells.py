@@ -19,5 +19,3 @@ class SeaShell(Base):
     species = Column(String)
     description = Column(String(200), nullable=True)
     image_url = Column(String)
-
-

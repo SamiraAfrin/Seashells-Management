@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker, Session
-from fastapi import Depends
+from sqlalchemy.orm import sessionmaker, Session
 
 from app.models.seashells import SeaShell, Base
 from app.app_config import DATABASE_URL, OFFSET, LIMIT

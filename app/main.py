@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from app.delivery.seashells import seashell_router
 
 app = FastAPI()

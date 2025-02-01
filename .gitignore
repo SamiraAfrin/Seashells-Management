@@ -131,3 +131,4 @@ dmypy.json
 
 # Project specific
 static/images/seashell_images
+*.db

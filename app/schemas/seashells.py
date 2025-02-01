@@ -20,6 +20,7 @@ class UpdateSeaShellReq(BaseModel):
 
 
 class SeaShellResponse(BaseModel):
+    id: int
     created_at: datetime
     updated_at: datetime
     collected_at: datetime

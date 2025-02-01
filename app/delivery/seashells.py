@@ -81,7 +81,7 @@ def get_seashell(seashell_id: int, db: Session = Depends(get_database)):
 def get_all_seashells(db: Session = Depends(get_database)):
 
     seashell_objs = get_all_seashells_usecase(db)
-    
+
     return Response(message="Seashells retrived successfully", data=seashell_objs)
 
 

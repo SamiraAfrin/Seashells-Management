@@ -85,7 +85,7 @@ def get_all_seashells(db: Session = Depends(get_database)):
     return Response(message="Seashells retrived successfully", data=seashell_objs)
 
 
-@seashell_router.put("/{seashell_id}", response_model=Response)
+@seashell_router.patch("/{seashell_id}", response_model=Response)
 def update_seashells(
     seashell_id: int,
     name: str = Form(None),

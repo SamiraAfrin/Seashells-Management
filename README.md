@@ -23,12 +23,13 @@ Follow the following steps to start the web application.
 {
   "name": "Seashell_1",
   "collection_at": "2025-01-30T15:00:00",
-  "description": "This is collected from   cox'z bazar",
+  "description": "This is collected from cox'z bazar",
   "species": "snail",
   "image": "seashell.png"
 }
 ```
-- **Response**
+- **Response:** <br>
+`201`
 ```json
 {
     "message": "Seashell created successfully",
@@ -39,9 +40,36 @@ Follow the following steps to start the web application.
         "collected_at": "2025-01-30T15:00:00",
         "name": "Seashell_1",
         "species": "snail",
-        "description": "This is collected from  cox'z bazar",
+        "description": "This is collected from cox'z bazar",
         "image_url": "static/images/seashell_images/seashell.png"
     }
+}
+```
+- **Example Payload:** 
+
+```json
+{
+  "collection_at": "2025-01-30T15:00:00",
+  "description": "This is collected from cox'z bazar",
+  "species": "snail",
+  "image": "seashell.png"
+}
+```
+- **Response:** <br>
+`422`
+```json
+{
+    "detail": [
+        {
+            "type": "missing",
+            "loc": [
+                "body",
+                "name"
+            ],
+            "msg": "Field required",
+            "input": null
+        }
+    ]
 }
 ```
 
@@ -55,12 +83,13 @@ Follow the following steps to start the web application.
 {
   "name": "Seashell_updated",
   "collection_at": "2025-01-30T15:00:00",
-  "description": "This is collected from   cox'z bazar",
+  "description": "This is collected from cox'z bazar",
   "species": "snail",
   "image": "seashell.png"
 }
 ```
-- **Response**
+- **Responses:** <br>
+`200`
 ```json
 {
     "message": "Seashell updated successfully",
@@ -76,11 +105,18 @@ Follow the following steps to start the web application.
     }
 }
 ```
+`404`
+```json
+{
+    "detail": "Seashell not found"
+}
+```
 
 3. GET
 - **Path:** http://127.0.0.1:7777/v1/seashell/{seashell_id}
 - **Method:** GET
-- **Response**
+- **Responses:** <br>
+`200`
 ```json
 {
     "message": "Seashell retrived successfully",
@@ -96,12 +132,19 @@ Follow the following steps to start the web application.
     }
 }
 ```
+`404`
+```json
+{
+    "detail": "Seashell not found"
+}
+```
 
 4. GET
 - **Path:** http://127.0.0.1:7777/v1/seashell
 - **Method:** GET
 - **NOTE:** Pagination limit is 10
-- **Response**
+- **Response:** <br>
+`200`
 ```json
 {
     "message": "Seashells retrived successfully",
@@ -113,7 +156,7 @@ Follow the following steps to start the web application.
             "collected_at": "2024-02-01T14:30:45",
             "name": "Updated_Seashell",
             "species": "snail",
-            "description": "seashell description",
+            "description": "This is collected from cox'z bazar",
             "image_url": "static/images/seashell_images/seashell.png"
         },
         {
@@ -123,7 +166,7 @@ Follow the following steps to start the web application.
             "collected_at": "2024-02-01T14:30:45",
             "name": "Test Seashell",
             "species": "snail",
-            "description": "Test seashell description",
+            "description": "This is collected from cox'z bazar",
             "image_url": "static/images/seashell_images/seashell.png"
         },
         {
@@ -133,7 +176,7 @@ Follow the following steps to start the web application.
             "collected_at": "2024-02-01T14:30:45",
             "name": "Test Seashell",
             "species": "snail",
-            "description": "Test seashell description",
+            "description": "This is collected from cox'z bazar",
             "image_url": "static/images/seashell_images/image.png"
         },
         ......
@@ -145,7 +188,8 @@ Follow the following steps to start the web application.
 5. DELETE
 - **Path:** http://127.0.0.1:7777/v1/seashell/{seashell_id}
 - **Method:** DELETE
-- **Response**
+- **Responses:** <br>
+`200`
 ```json
 {
     "message": "Seashell deleted successfully",
@@ -159,5 +203,11 @@ Follow the following steps to start the web application.
         "description": "This is collected from cox'z bazar",
         "image_url": "static/images/seashell_images/seashell.png"
     }
+}
+```
+`404`
+```json
+{
+    "detail": "Seashell not found"
 }
 ```

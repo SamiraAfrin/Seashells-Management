@@ -71,7 +71,7 @@ def test_add_seashell(db_session):
     response = client.post("/v1/seashell/", data=data, files=files)
 
     # Check if the response is successful
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json()["message"] == "Seashell created successfully"
     assert "data" in response.json()
 

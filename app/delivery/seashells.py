@@ -40,7 +40,7 @@ def save_image(image: UploadFile):
         return False, None
 
 
-@seashell_router.post("/", response_model=Response)
+@seashell_router.post("/", status_code=201,response_model=Response)
 def add_seashells(
     name: str = Form(...),
     collected_at: str = Form(...),
